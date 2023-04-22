@@ -1,0 +1,59 @@
+var dialog = document.querySelector("#dicerollerdialog");
+var btn = dialog.querySelectorAll("h3")[1];
+btn.innerHTML = "Roll Initiative";
+btn.style.cursor = "pointer";
+var sendCommand = function(cmd) {
+var ta = document.querySelector("#textchat-input > textarea");
+ta.value = cmd;
+var snd = document.querySelector("#textchat-input .btn");
+snd.click(); 
+
+};
+
+btn.addEventListener("click", function() {
+sendCommand("/roll 1d20 + 6 &{tracker}");
+});
+
+
+var toolbar = document.querySelector("#floatingtoolbar ul");
+
+var rollDaggerHit = document.createElement("li");
+rollDaggerHit.innerHTML = "Dag/Hit";
+rollDaggerHit.setAttribute("style","font-size:10px;");
+var rollDaggerDam = document.createElement("li");
+rollDaggerDam.setAttribute("style","font-size:10px;");
+rollDaggerDam.innerHTML="DagCrit";
+var rollBowDam = document.createElement("li");
+rollBowDam.setAttribute("style","font-size:10px;");
+rollBowDam.innerHTML = "BowDam";
+var rollRapierHit = document.createElement("li");
+rollRapierHit.setAttribute("style","font-size:10px;");
+rollRapierHit.innerHTML = "RapHit";
+ 
+rollDaggerHit.addEventListener("click", function() {
+sendCommand("/roll 1d20+9");
+
+});
+
+rollRapierHit.addEventListener("click", function() {
+sendCommand("/roll 1d20+8");
+
+}); 
+
+
+rollDaggerDam.addEventListener("click", function() {
+sendCommand("/roll 1d4+5+1d6+5d6");
+
+});
+
+rollBowDam.addEventListener("click", function() {
+sendCommand("/roll 1d8+5+5d6");
+
+});
+
+toolbar.appendChild(rollDaggerHit);
+toolbar.appendChild(rollDaggerDam);
+toolbar.appendChild(rollBowDam);
+toolbar.appendChild(rollRapierHit);
+document.querySelector("#floatingtoolbar").style.width = "60px";
+document.querySelector(".dark-mode-switch").style.display = "none";
